@@ -26,8 +26,9 @@ return {
 	bg_winbar      = "#0f0a1c",
 	bg_cursorline  = "#140e24",
 	bg_colorcolumn = "#1f0f38",
-	bg_visual      = "#ff5fc4", -- vivid bubblegum selection (punchy, on-brand)
-	fg_visual      = "#1a0418", -- near-black plum text on the bright pink selection
+	bg_visual      = "#3d2c5a", -- dark violet selection; syntax colors show through and stay readable
+	-- fg_visual omitted on purpose: with no fg override the selected text keeps
+	-- its per-token syntax colors instead of flattening to one flat color.
 	bg_statusline  = "#ff45c0", -- bright bubblegum status bar (the brand, full-width)
 	fg_statusline  = "#fff4fb", -- near-white text on the bright pink bar
 

@@ -56,8 +56,9 @@ function M.apply(name, p)
 
 	-- Selection / search — elflord uses a grey Visual and reverse-video IncSearch;
 	-- set solid palette colors so they read correctly on any background. fg_visual
-	-- lets each variant pick selected-text color: dark on a light selection or
-	-- light on a dark one.
+	-- is OPTIONAL: omit it (the default does) so the selection only sets a bg and
+	-- the selected text keeps its per-token syntax colors instead of flattening to
+	-- one color. Set it only for a light selection that needs dark text.
 	hl("Visual", { fg = p.fg_visual, bg = p.bg_visual })
 	hl("Search", { fg = p.bg, bg = p.variable })
 	hl("IncSearch", { fg = p.bg, bg = p.func })
@@ -222,9 +223,12 @@ function M.apply(name, p)
 		hl("DiagnosticUnderline" .. sev, { sp = color, undercurl = true })
 		hl("DiagnosticFloating" .. sev, { fg = color, bg = p.bg_float })
 		-- Sign groups are reused by the default statusline's vim.diagnostic.status()
-		-- ("E:17 …"). Pin a black bg so the count reads as a dark-backed segment on
-		-- the bright-pink StatusLine; in the (black) signcolumn the bg is invisible.
-		hl("DiagnosticSign" .. sev, { fg = color, bg = p.bg })
+		-- ("E:17 …"). Red doesn't read on the bright-pink StatusLine, and a bg here
+		-- would paint a disruptive segment on the bar. So the signs take the
+		-- statusline's near-white text (no bg): the count blends into the bar and
+		-- reads, at the cost of severity color in the (black) signcolumn —
+		-- virtual-text and underlines above keep the vivid per-severity hues.
+		hl("DiagnosticSign" .. sev, { fg = p.fg_statusline or p.fg_bright })
 	end
 end
 

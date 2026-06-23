@@ -31,11 +31,15 @@ added later as `stargum-<variant>`.
 ### Diagnostics on the pink statusline
 
 Neovim 0.12's default statusline embeds `vim.diagnostic.status()` ("E:17 …"),
-colored with the `DiagnosticSign*` groups — and `%#group#` paints that group's
-**bg** too. With a bright-pink `bg_statusline`, a red error count is unreadable.
-So the core pins `DiagnosticSign*` to `{ fg = diag_*, bg = p.bg }`: in the (black)
-signcolumn the bg is invisible, but on the pink bar the counts render as readable
-dark-backed segments. Don't drop that bg while the statusline stays bright.
+colored with the `DiagnosticSign*` groups. Red doesn't read on the bright-pink
+`bg_statusline`, and giving the sign groups a bg paints a disruptive segment on
+the bar (`%#group#` applies the group's bg). So the core sets `DiagnosticSign*`
+to `{ fg = fg_statusline }` (near-white, no bg): the count blends into the bar
+and reads. Trade-off: the (black) signcolumn signs are near-white too, losing
+per-severity color there — but `DiagnosticVirtualText*` / `DiagnosticUnderline*`
+keep the vivid `diag_*` hues, so inline severity color is preserved. This is a
+deliberate consequence of the bright bar; revisit if `bg_statusline` ever goes
+dark (then vivid `diag_*` signs read fine and the override can be dropped).
 - `colors/stargum.lua` — one line: `require("stargum").load("stargum")`.
 
 Adding a variant = a new palette file + a one-line colors file. No core changes.
@@ -84,10 +88,12 @@ background, with **cyan as the cool relief** (type = electric cyan, string =
 mint-cyan, key = pale cyan). The gold lives only on borders + the gold ANSI/UI
 slots, so it reads as structure, not syntax.
 
-When the core drives a group from the palette, dark-on-light tricks only work on
-light surfaces — `fg_visual` exists so each variant sets selected-text color
-explicitly (the default puts dark plum text on a bright bubblegum selection).
-Keep UI-accent colors legible as foreground on dark selected backgrounds.
+`fg_visual` is **optional** and the default omits it: with no fg override the
+Visual selection only sets `bg_visual`, so selected text keeps its per-token
+syntax colors instead of flattening to one flat color. This means `bg_visual`
+must be a dark, low-saturation surface the vivid syntax hues read on (the default
+is a dark violet `#3d2c5a`) — a bright selection bg would swallow same-hue tokens.
+Only set `fg_visual` for a light selection that genuinely needs dark text.
 
 ### Light variants (future)
 
