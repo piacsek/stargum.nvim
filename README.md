@@ -10,14 +10,23 @@ muted-gold border — full-tilt cybernetic neon.
 ## Showcase
 
 `showcase.tsx` and `showcase.ex` (in [`samples/`](samples)) rendered with
-treesitter highlighting. More variants (including a light one) are on the way —
-each is just a palette swap over the same shared highlight set.
+treesitter highlighting. Each variant is a palette swap over the same shared
+highlight set.
 
 ### ⭐️ `stargum`
 
 | `showcase.tsx` | `showcase.ex` |
 | --- | --- |
 | ![](samples/screenshots/stargum-tsx.png) | ![](samples/screenshots/stargum-ex.png) |
+
+### 🌸 `stargum-light`
+
+The daylit nebula — a near-white, faintly-pink background with deep, saturated
+syntax. Same bubblegum × space identity, inverted.
+
+| `showcase.tsx` | `showcase.ex` |
+| --- | --- |
+| ![](samples/screenshots/light-tsx.png) | ![](samples/screenshots/light-ex.png) |
 
 ## Install
 

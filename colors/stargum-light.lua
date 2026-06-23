@@ -1,0 +1,1 @@
+require("stargum").load("light")
