@@ -206,6 +206,26 @@ function M.apply(name, p)
 	hl("@lsp.type.class", { fg = p.module, bold = true })
 	hl("@lsp.type.enumMember", { link = "@variable.member" })
 	hl("@lsp.typemod.enumMember.readonly", { link = "@variable.member" })
+
+	-- ── Diagnostics ─────────────────────────────────────────────────────────
+	-- Base fg colors read on the black editor (virtual text, floats, underlines).
+	-- elflord/Neovim leaves DiagnosticError a pure-red that vanishes elsewhere.
+	local diag = {
+		Error = p.diag_error or p.keyword,
+		Warn = p.diag_warn or p.accent,
+		Info = p.diag_info or p.type,
+		Hint = p.diag_hint or p.comment,
+	}
+	for sev, color in pairs(diag) do
+		hl("Diagnostic" .. sev, { fg = color })
+		hl("DiagnosticVirtualText" .. sev, { fg = color })
+		hl("DiagnosticUnderline" .. sev, { sp = color, undercurl = true })
+		hl("DiagnosticFloating" .. sev, { fg = color, bg = p.bg_float })
+		-- Sign groups are reused by the default statusline's vim.diagnostic.status()
+		-- ("E:17 …"). Pin a black bg so the count reads as a dark-backed segment on
+		-- the bright-pink StatusLine; in the (black) signcolumn the bg is invisible.
+		hl("DiagnosticSign" .. sev, { fg = color, bg = p.bg })
+	end
 end
 
 -- Convenience loader: `require("stargum").load("stargum")` loads the palette

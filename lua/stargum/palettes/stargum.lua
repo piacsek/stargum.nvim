@@ -51,7 +51,7 @@ return {
 
 	-- Syntax accents
 	func           = "#f23bff", -- glaring magenta-orchid (functions)
-	module         = "#c14dff", -- electric violet (bold modules/classes/tags)
+	module         = "#ffd84a", -- glaring gold-yellow (bold modules/classes/tags) — the yellow accent
 	key            = "#4df3ff", -- glaring pale cyan (atoms / map keys / properties)
 	constant       = "#d68cff", -- bright violet (Elixir module attrs)
 
@@ -60,6 +60,14 @@ return {
 	accent         = "#ff2fb0", -- glaring bubblegum (primary UI accent — pink is the star)
 	match          = "#00ffd5", -- glaring cyan (completion match — cool relief)
 	border         = "#d2ab5a", -- muted gold (float borders + window separators)
+
+	-- Diagnostics — vivid fg that reads on the black editor; the core gives the
+	-- *sign* groups a black bg so the diagnostic counts in the (pink) statusline
+	-- render as readable dark-backed segments instead of red-on-pink.
+	diag_error     = "#ff2d6a", -- red
+	diag_warn      = "#ffb02e", -- amber (distinct from the gold-yellow modules)
+	diag_info      = "#00e5ff", -- cyan
+	diag_hint      = "#7fdcc0", -- muted teal
 
 	-- Terminal ANSI palette — hand-tuned so red/green/blue read correctly in
 	-- :terminal even though the syntax palette is anchored on the pink-violet
