@@ -23,8 +23,8 @@ added later as `stargum-<variant>`.
   define the full semantic key contract (see `stargum.lua` for the canonical
   list: surfaces, text, syntax, accents). Optional keys: `cursor` (overrides the
   `Cursor` block color, else derives from `string`), `cursor_text` (the glyph
-  under the cursor — keep it light against the block; falls back to `bg`, a dark
-  cut-out), `bg_statusline` (a dedicated
+  under the cursor — must contrast the block: light on a dark cursor, dark on a
+  light one; falls back to `bg`), `bg_statusline` (a dedicated
   StatusLine background, else `bg_active`), `fg_statusline` (StatusLine text,
   else `fg_bright` — e.g. dark text on a bright bar), `diag_error`/`diag_warn`/
   `diag_info`/`diag_hint` (diagnostic fg colors; fall back to keyword/accent/
