@@ -38,35 +38,36 @@ return {
 	fg_dim         = "#a79cc2",
 	fg_bright      = "#f9f5ff",
 
-	-- Syntax — vivid violet/pink core with bright cyan relief (string/type/key
-	-- carry the cool side; keyword/func/module/special carry the pink-violet side).
-	comment        = "#776d9a", -- muted violet-grey (recessive, still legible)
-	string         = "#69eccb", -- bright mint-cyan (literals/numbers/booleans)
-	variable       = "#dcc6ff", -- lavender (frequent token, stays calm near text)
-	keyword        = "#ff2fa8", -- vivid hot bubblegum (Statement/Keyword — pops)
-	type           = "#48dcff", -- bright electric cyan (the cybernetic edge)
-	special        = "#ff77d4", -- bright pink
-	preproc        = "#86a4ff", -- periwinkle blue
+	-- Syntax — GLARING neon violet/pink core with electric-cyan relief
+	-- (string/type/key carry the cool side; keyword/func/module/special carry the
+	-- pink-violet side). Pushed near the gamut edge to match elflord's intensity.
+	comment        = "#847aa6", -- muted violet-grey (recessive, but readable on black)
+	string         = "#00ffc8", -- glaring spring cyan-green (literals/numbers/booleans)
+	variable       = "#e3baff", -- bright lavender (frequent token, stays legible)
+	keyword        = "#ff1493", -- glaring deep hot pink (Statement/Keyword — pops hardest)
+	type           = "#00e5ff", -- glaring electric cyan (the cybernetic edge)
+	special        = "#ff5cd2", -- bright pink
+	preproc        = "#5c7cff", -- electric periwinkle blue
 
 	-- Syntax accents
-	func           = "#ef79ff", -- bright orchid (functions pop violet-pink)
-	module         = "#bd84ff", -- violet (bold modules/classes/tags)
-	key            = "#8df0ff", -- bright pale cyan (atoms / map keys / properties)
-	constant       = "#ccaaff", -- light violet (Elixir module attrs)
+	func           = "#f23bff", -- glaring magenta-orchid (functions)
+	module         = "#c14dff", -- electric violet (bold modules/classes/tags)
+	key            = "#4df3ff", -- glaring pale cyan (atoms / map keys / properties)
+	constant       = "#d68cff", -- bright violet (Elixir module attrs)
 
 	-- UI accents
-	cursor         = "#ef79ff", -- bright orchid block cursor (in-family with the core)
-	accent         = "#ff45c0", -- vivid bubblegum (primary UI accent — pink is the star)
-	match          = "#46ece6", -- bright cyan (completion match — cool relief)
+	cursor         = "#f23bff", -- glaring orchid block cursor (in-family with the core)
+	accent         = "#ff2fb0", -- glaring bubblegum (primary UI accent — pink is the star)
+	match          = "#00ffd5", -- glaring cyan (completion match — cool relief)
 	border         = "#d2ab5a", -- muted gold (float borders + window separators)
 
 	-- Terminal ANSI palette — hand-tuned so red/green/blue read correctly in
 	-- :terminal even though the syntax palette is anchored on the pink-violet
-	-- family. Slot 0 lifts to bg_dim via the core.
+	-- family. Slot 0 lifts to bg_dim via the core. Vivid to match the theme.
 	ansi = {
-		[1] = "#ff4f7f", [2] = "#5fe0ad", [3] = "#d2ab5a", [4] = "#86a4ff",
-		[5] = "#ff2fa8", [6] = "#48dcff", [7] = "#dcd6ec", [8] = "#7d7298",
-		[9] = "#ff7aa2", [10] = "#69eccb", [11] = "#f4cf78", [12] = "#a6bcff",
-		[13] = "#ff77d4", [14] = "#7ff2ff", [15] = "#f9f5ff",
+		[1] = "#ff2d6a", [2] = "#00ffa0", [3] = "#ffcf3d", [4] = "#5c7cff",
+		[5] = "#ff1493", [6] = "#00e5ff", [7] = "#dcd6ec", [8] = "#847aa6",
+		[9] = "#ff5c87", [10] = "#4dffc0", [11] = "#ffe066", [12] = "#8aa0ff",
+		[13] = "#ff5cd2", [14] = "#5cf3ff", [15] = "#f9f5ff",
 	},
 }

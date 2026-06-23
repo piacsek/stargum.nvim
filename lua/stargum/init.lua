@@ -1,14 +1,15 @@
 -- stargum.nvim
--- A bubblegum × space colorscheme forked from Neovim's bundled `zaibatsu`:
--- nebula pinks and electric cyans over a deep-space background, with muted
--- gold borders. The highlight logic below is shared; each variant supplies its
--- own palette table.
+-- A bubblegum × space colorscheme forked from Neovim's bundled `elflord`:
+-- glaring nebula pinks and electric cyans over a black deep-space background,
+-- with muted gold borders. The highlight logic below is shared; each variant
+-- supplies its own palette table.
 --
 -- The palette is a full semantic contract — see lua/stargum/palettes/stargum.lua
 -- for the canonical key list. The core drives the editor base (Normal, syntax,
 -- line numbers, cursorline, …) from the palette so each variant fully owns its
--- look rather than inheriting zaibatsu's purple. zaibatsu is still loaded first
--- as a base so the long tail of minor groups has sane defaults.
+-- look rather than inheriting elflord's neon-primary defaults. elflord is still
+-- loaded first as a base so the long tail of minor groups has sane (and, fitting
+-- this theme, already-vivid) defaults.
 
 local M = {}
 
@@ -16,15 +17,15 @@ local function hl(name, opts)
 	vim.api.nvim_set_hl(0, name, opts)
 end
 
--- Apply the shared stargum highlight set on top of zaibatsu, using `p` (a
+-- Apply the shared stargum highlight set on top of elflord, using `p` (a
 -- palette table) for colors and registering under colorscheme `name`.
 function M.apply(name, p)
-	-- Inherit zaibatsu as the base, then layer our overrides on top.
+	-- Inherit elflord as the base, then layer our overrides on top.
 	vim.cmd("hi clear")
 	if vim.fn.exists("syntax_on") == 1 then
 		vim.cmd("syntax reset")
 	end
-	vim.cmd.runtime("colors/zaibatsu.vim")
+	vim.cmd.runtime("colors/elflord.vim")
 	vim.g.colors_name = name
 
 	-- `border` is stargum's signature: float borders and window separators all
@@ -33,16 +34,17 @@ function M.apply(name, p)
 
 	-- ── Editor base ─────────────────────────────────────────────────────────
 	-- Drive the main surfaces + gutter from the palette so the background tone
-	-- follows the variant (zaibatsu hardcodes these to purple).
+	-- follows the variant (elflord hardcodes Normal to cyan-on-black).
 	hl("Normal", { fg = p.fg_normal, bg = p.bg })
 	hl("NormalNC", { link = "Normal" })
 	hl("EndOfBuffer", { fg = p.comment, bg = p.bg })
 	hl("NonText", { fg = p.fg_muted, bg = p.bg })
 	hl("Conceal", { fg = p.fg_muted })
+	hl("SpecialKey", { fg = p.fg_muted }) -- elflord's glaring cyan whitespace/listchars markers
 	hl("ColorColumn", { bg = p.bg_colorcolumn })
 	hl("CursorLine", { bg = p.bg_cursorline })
 	hl("CursorColumn", { bg = p.bg_cursorline })
-	hl("CursorLineNr", { link = "CursorLine" }) -- matches zaibatsu's linkage
+	hl("CursorLineNr", { link = "CursorLine" }) -- subdue elflord's bold-yellow current line number
 	hl("LineNr", { fg = p.comment })
 	hl("SignColumn", { fg = p.preproc })
 	hl("FoldColumn", { fg = p.preproc })
@@ -52,22 +54,32 @@ function M.apply(name, p)
 	hl("Directory", { fg = p.variable })
 	hl("Cursor", { fg = p.bg, bg = p.cursor or p.string }) -- palettes may override the block color
 
-	-- Selection / search — zaibatsu uses reverse video (purple); set solid
-	-- palette colors so they read correctly on any background. fg_visual lets
-	-- each variant pick selected-text color: dark on a light selection or light
-	-- on a dark one.
+	-- Selection / search — elflord uses a grey Visual and reverse-video IncSearch;
+	-- set solid palette colors so they read correctly on any background. fg_visual
+	-- lets each variant pick selected-text color: dark on a light selection or
+	-- light on a dark one.
 	hl("Visual", { fg = p.fg_visual, bg = p.bg_visual })
 	hl("Search", { fg = p.bg, bg = p.variable })
 	hl("IncSearch", { fg = p.bg, bg = p.func })
 	hl("CurSearch", { link = "IncSearch" })
 
 	-- ── Core syntax ─────────────────────────────────────────────────────────
-	-- zaibatsu links String/Number/Boolean/Float→Constant, Function→Identifier,
-	-- Keyword→Statement, Typedef→Type, so setting the parents is enough.
+	-- elflord links String/Number/Boolean/Float→Constant, Keyword/Label→Statement,
+	-- Typedef/Structure/StorageClass→Type, so setting those parents is enough.
+	-- Unlike zaibatsu, elflord does NOT link Function→Identifier (Function is a
+	-- standalone white group) and gives Operator a glaring pure-red — both off
+	-- our palette, so set them explicitly below.
 	hl("Comment", { fg = p.comment })
 	hl("Constant", { fg = p.string })
 	hl("Identifier", { fg = p.variable })
+	hl("Function", { fg = p.func })
 	hl("Statement", { fg = p.keyword })
+	-- elflord links Conditional→Repeat and leaves Repeat a standalone white (it
+	-- does NOT fold into Statement), so if/else/for/while would go white. Pull the
+	-- whole keyword family back onto `keyword`.
+	hl("Repeat", { fg = p.keyword })
+	hl("Conditional", { fg = p.keyword })
+	hl("Operator", { fg = p.fg })
 	hl("Type", { fg = p.type })
 	hl("Special", { fg = p.special })
 	hl("PreProc", { fg = p.preproc })

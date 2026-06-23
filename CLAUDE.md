@@ -1,8 +1,8 @@
 # stargum.nvim — repo guide
 
-A **bubblegum × space** colorscheme forked from Neovim's bundled `zaibatsu`:
-nebula pinks and electric cyans over a deep-space indigo background, with muted
-**gold borders**. Cybernetic/neon energy without going full synthwave.
+A **bubblegum × space** colorscheme forked from Neovim's bundled `elflord`:
+glaring nebula pinks and electric cyans over a black deep-space background, with
+muted **gold borders**. Full-tilt cybernetic neon.
 
 The default colorscheme is `stargum`. Built as a family (same architecture as
 sibling repo `scintilla.nvim`) so sub-variants (e.g. a light variant) can be
@@ -13,7 +13,7 @@ added later as `stargum-<variant>`.
 
 ## Architecture
 
-- `lua/stargum/init.lua` — shared core. `M.apply(name, palette)` loads zaibatsu
+- `lua/stargum/init.lua` — shared core. `M.apply(name, palette)` loads elflord
   as a base, then drives the editor base (Normal, core syntax, line numbers,
   cursorline, selection, search), surfaces (floats, statusline, tabs, popups),
   treesitter and LSP groups from the palette. `M.load(variant)` requires
@@ -30,11 +30,33 @@ added later as `stargum-<variant>`.
 
 Adding a variant = a new palette file + a one-line colors file. No core changes.
 
+## Base: elflord (and its quirks the core must neutralize)
+
+stargum forks Neovim's bundled `elflord` (was `zaibatsu` originally). elflord's
+neon-primary palette suits the glaring look, but its group structure differs —
+the core explicitly fixes these, so don't remove those lines:
+
+- **`Function` is standalone white**, NOT linked to `Identifier` (zaibatsu linked
+  it). Core sets `Function = func`.
+- **`Operator` is a glaring pure-red `#ff0000`.** Core sets `Operator = fg` so
+  `=`, `=>`, `|>` aren't red.
+- **`Conditional → Repeat`, and `Repeat` is standalone white** (does NOT fold
+  into `Statement`), so `if/else/for/while` would render white. Core sets both
+  `Repeat` and `Conditional` to `keyword`.
+- **`SpecialKey` is glaring cyan** (whitespace/listchars). Core sets it to
+  `fg_muted`.
+- What still works like zaibatsu: `String/Number/Boolean/Float → Constant`,
+  `Keyword/Label → Statement`, `Typedef/Structure/StorageClass → Type` — so
+  setting those parents from the palette is enough.
+
+If you ever change the base again, re-audit which legacy groups the new base
+leaves unlinked or off-palette and neutralize them here.
+
 ## The gold border (signature)
 
 stargum's defining trait vs. scintilla: a dedicated **`border`** palette key
 routes `FloatBorder`, `WinSeparator`, `VertSplit`, and WhichKey borders to a
-**muted gold** (`#c9a45a` in the default) — not too bright, not too dark. It
+**muted gold** (`#d2ab5a` in the default) — not too bright, not too dark. It
 falls back to `fg_muted` if a variant omits it, but every stargum variant should
 keep a gold (or gold-family) edge — it's the brand. Adjust hue per variant's
 background, never drop it to gray.

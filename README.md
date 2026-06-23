@@ -3,9 +3,9 @@
 </p>
 
 A **bubblegum × space** colorscheme for Neovim, forked from the bundled
-`zaibatsu` and tuned for everyday TypeScript and Elixir work. Nebula pinks and
-electric cyans over a deep-space indigo background, with a signature muted-gold
-border — cybernetic/neon energy without going full synthwave.
+`elflord` and tuned for everyday TypeScript and Elixir work. Glaring nebula
+pinks and electric cyans over a black deep-space background, with a signature
+muted-gold border — full-tilt cybernetic neon.
 
 ## Showcase
 
@@ -34,8 +34,8 @@ With `lazy.nvim`:
 { "piacsek/stargum.nvim", config = function() vim.cmd.colorscheme("stargum") end }
 ```
 
-The theme inherits from Neovim's bundled `zaibatsu` (loaded via `:runtime
-colors/zaibatsu.vim`), so it requires no other dependencies — `zaibatsu` ships
+The theme inherits from Neovim's bundled `elflord` (loaded via `:runtime
+colors/elflord.vim`), so it requires no other dependencies — `elflord` ships
 with Neovim.
 
 ## Make your terminal follow
