@@ -25,8 +25,8 @@ return {
 	bg_colorcolumn = "#f6d7ec",
 	bg_visual      = "#ffd3ee", -- light pink selection; deep syntax shows through and stays readable
 	-- fg_visual omitted: selected text keeps its per-token (deep) syntax colors.
-	bg_statusline  = "#d61f8f", -- deep bubblegum bar (dark text still reads at this luminance)
-	fg_statusline  = "#2b0a22", -- dark plum text on the pink bar; also colors the diagnostic counts
+	bg_statusline  = "#f7d4e8", -- soft light-pink bar (diamond-style: a subtle surface, not a loud color)
+	fg_statusline  = "#1a0614", -- darkest plum text on the soft bar; also colors the diagnostic counts
 
 	-- Text — deep plum (dark) on the light surfaces; muted tones stay mid/light.
 	fg_normal      = "#2b0a22", -- editor text
