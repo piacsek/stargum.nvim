@@ -189,6 +189,21 @@ the nvim colorscheme. Switching the nvim colorscheme writes `theme = <name>` to
 `piacsek/ghostty-mirror.nvim`). Add a `-light` variant file if/when a light
 background is built.
 
+**ghostty-mirror caches the generated theme** at `~/.config/ghostty/themes/
+<name>` (and tmux at `~/.config/tmux/themes/<name>.conf`) and **does NOT
+regenerate it on a plain `:colorscheme`** — it reuses the cached file. So a
+palette change to any mirrored surface (`Normal`, `Cursor`, `Visual`, `bg`, or
+any `terminal_color_*`/`ansi`) silently does NOT reach the terminal until you
+regenerate. After such a change, run **`:ThemeToGhostty`** (and `:ThemeToTmux`)
+to rewrite the cache from live highlights and reload — or headless:
+
+```sh
+nvim --headless -c "colorscheme stargum" -c "ThemeToGhostty" -c "qa"
+```
+
+(`:ThemeCacheClear` deletes all generated theme files if you want a clean
+regen.) The README gallery is unaffected — it renders syntax, not `:terminal`.
+
 ## Install / dev loop
 
 Develop in `~/projects/stargum.nvim`. Consumed via `vim.pack` from
