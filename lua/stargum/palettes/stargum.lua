@@ -16,55 +16,55 @@
 --   fg_muted if omitted, but stargum's whole point is the gold edge — keep it.
 
 return {
-	-- Surfaces — deep-space indigo/violet, lifting toward a warmer violet on the
-	-- interactive surfaces so accents sit alive against them.
-	bg             = "#0d0a1f",
-	bg_float       = "#171033",
-	bg_inactive    = "#120c28",
-	bg_dim         = "#241848",
-	bg_active      = "#352458", -- selection/menu surface; `accent` reads on it
-	bg_winbar      = "#1a1238",
-	bg_cursorline  = "#1e1640",
-	bg_colorcolumn = "#2a1450",
-	bg_visual      = "#ffa6d9", -- bubblegum selection (punchy, on-brand)
-	fg_visual      = "#240a24", -- dark plum text on the bright pink selection
+	-- Surfaces — pure-black space. The interactive surfaces lift just off black
+	-- toward violet so accents sit alive against them without graying the void.
+	bg             = "#000000",
+	bg_float       = "#120a1f",
+	bg_inactive    = "#0a0712",
+	bg_dim         = "#1c1230",
+	bg_active      = "#2c1c48", -- selection/menu surface; `accent` reads on it
+	bg_winbar      = "#0f0a1c",
+	bg_cursorline  = "#140e24",
+	bg_colorcolumn = "#1f0f38",
+	bg_visual      = "#ff5fc4", -- vivid bubblegum selection (punchy, on-brand)
+	fg_visual      = "#1a0418", -- near-black plum text on the bright pink selection
 
 	-- Text — soft white with a faint violet tint so it reads as "space," not gray.
-	fg_normal      = "#ece6ff",
-	fg             = "#d8d2e8",
-	fg_muted       = "#7d7396",
-	fg_dim         = "#a298bc",
-	fg_bright      = "#f5f0ff",
+	fg_normal      = "#f0eaff",
+	fg             = "#dcd6ec",
+	fg_muted       = "#7d7298",
+	fg_dim         = "#a79cc2",
+	fg_bright      = "#f9f5ff",
 
-	-- Syntax — violet/pink core with cyan relief (string/type/key carry the cool
-	-- side; keyword/func/module/special carry the pink-violet side).
-	comment        = "#736a93", -- muted violet-grey (recessive, still legible)
-	string         = "#7fe3c9", -- mint-cyan (literals/numbers/booleans)
-	variable        = "#d3c4f5", -- lavender (frequent token, stays calm near text)
-	keyword        = "#ff6fc0", -- bubblegum pink (Statement/Keyword — pops)
-	type           = "#57d6e8", -- electric cyan (the cybernetic edge)
-	special        = "#ff96d8", -- lighter pink
-	preproc        = "#7f9dff", -- periwinkle blue
+	-- Syntax — vivid violet/pink core with bright cyan relief (string/type/key
+	-- carry the cool side; keyword/func/module/special carry the pink-violet side).
+	comment        = "#776d9a", -- muted violet-grey (recessive, still legible)
+	string         = "#69eccb", -- bright mint-cyan (literals/numbers/booleans)
+	variable       = "#dcc6ff", -- lavender (frequent token, stays calm near text)
+	keyword        = "#ff2fa8", -- vivid hot bubblegum (Statement/Keyword — pops)
+	type           = "#48dcff", -- bright electric cyan (the cybernetic edge)
+	special        = "#ff77d4", -- bright pink
+	preproc        = "#86a4ff", -- periwinkle blue
 
 	-- Syntax accents
-	func           = "#e58bff", -- orchid (functions pop violet-pink)
-	module         = "#b78bff", -- violet (bold modules/classes/tags)
-	key            = "#9be0ee", -- pale cyan (atoms / map keys / properties)
-	constant       = "#c6a6ff", -- light violet (Elixir module attrs)
+	func           = "#ef79ff", -- bright orchid (functions pop violet-pink)
+	module         = "#bd84ff", -- violet (bold modules/classes/tags)
+	key            = "#8df0ff", -- bright pale cyan (atoms / map keys / properties)
+	constant       = "#ccaaff", -- light violet (Elixir module attrs)
 
 	-- UI accents
-	cursor         = "#e58bff", -- orchid block cursor (in-family with the core)
-	accent         = "#ff8fd4", -- bubblegum (primary UI accent — pink is the star)
-	match          = "#5fe6df", -- cyan (completion match — cool relief)
-	border         = "#c9a45a", -- muted gold (float borders + window separators)
+	cursor         = "#ef79ff", -- bright orchid block cursor (in-family with the core)
+	accent         = "#ff45c0", -- vivid bubblegum (primary UI accent — pink is the star)
+	match          = "#46ece6", -- bright cyan (completion match — cool relief)
+	border         = "#d2ab5a", -- muted gold (float borders + window separators)
 
 	-- Terminal ANSI palette — hand-tuned so red/green/blue read correctly in
 	-- :terminal even though the syntax palette is anchored on the pink-violet
 	-- family. Slot 0 lifts to bg_dim via the core.
 	ansi = {
-		[1] = "#ff5f87", [2] = "#5fd7a7", [3] = "#c9a45a", [4] = "#7f9dff",
-		[5] = "#ff6fc0", [6] = "#57d6e8", [7] = "#d8d2e8", [8] = "#7d7396",
-		[9] = "#ff87a8", [10] = "#7fe3c9", [11] = "#f0cd7a", [12] = "#9bb4ff",
-		[13] = "#ff96d8", [14] = "#7fe9f4", [15] = "#f5f0ff",
+		[1] = "#ff4f7f", [2] = "#5fe0ad", [3] = "#d2ab5a", [4] = "#86a4ff",
+		[5] = "#ff2fa8", [6] = "#48dcff", [7] = "#dcd6ec", [8] = "#7d7298",
+		[9] = "#ff7aa2", [10] = "#69eccb", [11] = "#f4cf78", [12] = "#a6bcff",
+		[13] = "#ff77d4", [14] = "#7ff2ff", [15] = "#f9f5ff",
 	},
 }
