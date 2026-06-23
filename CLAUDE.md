@@ -92,6 +92,14 @@ Ghostty theme files — regenerate via the mirror after editing.
 
 ## Hard rules
 
+- **Never patch downloaded/installed library code** (anything under
+  `~/.local/share/nvim/site/pack/.../opt/`, including sibling repos like
+  `ghostty-mirror.nvim`). It's read-only from stargum's perspective — changes
+  there get clobbered on update and aren't tracked. Achieve the result through
+  config the user owns (e.g. ghostty-mirror's per-theme `overrides` in
+  `~/dotfiles/nvim/lua/core/plugins.lua`) or, if a real library feature is
+  missing, raise it as a change to that repo separately — don't edit the
+  installed copy in place.
 - Each palette owns its own syntax hues — there is no shared syntax module.
 - **Keep the gold border.** See "The gold border" above.
 - **Keep this file current.** Whenever we agree on a new convention or guideline,
