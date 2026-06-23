@@ -97,10 +97,12 @@ must be a dark, low-saturation surface the vivid syntax hues read on (the defaul
 is a dark violet `#3d2c5a`) — a bright selection bg would swallow same-hue tokens.
 Only set `fg_visual` for a light selection that genuinely needs dark text.
 
-### Light variants (future)
+### Light variant (`stargum-light`)
 
-The core's color math is background-agnostic, so a **light** variant just inverts
-which palette roles are pale vs. deep — no core changes. In a light palette:
+`stargum-light` ships (palette `lua/stargum/palettes/light.lua`, colors file
+`colors/stargum-light.lua`). The core's color math is background-agnostic, so a
+**light** variant just inverts which palette roles are pale vs. deep — no core
+changes. In a light palette:
 - **Every syntax + UI-accent color must be deep/saturated** — each is used either
   as a foreground on a light surface or as the dark backdrop behind the light
   `bg` (`Search`→`variable`, `IncSearch`→`func`, `Cursor`→`cursor`). Pale syntax
@@ -112,9 +114,24 @@ which palette roles are pale vs. deep — no core changes. In a light palette:
   dark-variant terminal-border contrast, but on a light variant `bg_dim` is pale
   and would make terminal "black" invisible.
 - The gold `border` likely needs to deepen so it reads on a light surface.
+- The light statusline follows scintilla-diamond's lead: a **soft, subtle bar**
+  (`bg_statusline` a light pink surface) with the **darkest** text, not a loud
+  saturated color — the deep pink lives as the tmux active-window accent instead.
 
-The Ghostty port (`port-nvim-theme-to-ghostty` skill, `&background=light` prefers
-`<name>-light`) and delta/lazygit theming key off the `-light` suffix.
+**ghostty-mirror double-`-light` gotcha (tmux/Ghostty overrides):** ghostty-mirror
+appends `light_variant_suffix` (`-light`) to the resolved theme name whenever
+`&background == "light"`. Because `stargum-light` is *itself* a light scheme (its
+light `bg` drives `&background=light`), the resolved theme name becomes
+**`stargum-light-light`**. So its tmux/Ghostty `overrides` in
+`~/dotfiles/nvim/lua/core/plugins.lua` must be keyed `"stargum-light-light"`, not
+`"stargum-light"` — otherwise the override silently doesn't apply and you get the
+un-themed default (teal `Type` accent, grey blended bar). (scintilla avoids the
+doubling by naming its light scheme `scintilla-diamond` and keying the override
+`scintilla-diamond-light`.) The cached theme files
+(`~/.config/{ghostty,tmux}/themes/`) are keyed the same way.
+
+The Ghostty port (`port-nvim-theme-to-ghostty` skill) and delta/lazygit theming
+key off the `-light` suffix.
 
 ## Terminal (ANSI) palette
 
