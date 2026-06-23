@@ -57,7 +57,8 @@ return {
 	constant       = "#d68cff", -- bright violet (Elixir module attrs)
 
 	-- UI accents
-	cursor         = "#f23bff", -- glaring orchid block cursor (in-family with the core)
+	cursor         = "#8f1bc9", -- deep orchid-violet block cursor (dark enough for a light glyph)
+	cursor_text    = "#fdf4ff", -- near-white glyph under the cursor (not a black cut-out)
 	accent         = "#ff2fb0", -- glaring bubblegum (primary UI accent — pink is the star)
 	match          = "#00ffd5", -- glaring cyan (completion match — cool relief)
 	border         = "#d2ab5a", -- muted gold (float borders + window separators)

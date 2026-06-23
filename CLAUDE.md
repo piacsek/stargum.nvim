@@ -22,7 +22,9 @@ added later as `stargum-<variant>`.
 - `lua/stargum/palettes/<variant>.lua` — a palette table. Every palette must
   define the full semantic key contract (see `stargum.lua` for the canonical
   list: surfaces, text, syntax, accents). Optional keys: `cursor` (overrides the
-  `Cursor` block color, else derives from `string`), `bg_statusline` (a dedicated
+  `Cursor` block color, else derives from `string`), `cursor_text` (the glyph
+  under the cursor — keep it light against the block; falls back to `bg`, a dark
+  cut-out), `bg_statusline` (a dedicated
   StatusLine background, else `bg_active`), `fg_statusline` (StatusLine text,
   else `fg_bright` — e.g. dark text on a bright bar), `diag_error`/`diag_warn`/
   `diag_info`/`diag_hint` (diagnostic fg colors; fall back to keyword/accent/

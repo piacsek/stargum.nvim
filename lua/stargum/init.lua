@@ -52,7 +52,10 @@ function M.apply(name, p)
 	hl("WinSeparator", { fg = border })
 	hl("VertSplit", { fg = border })
 	hl("Directory", { fg = p.variable })
-	hl("Cursor", { fg = p.bg, bg = p.cursor or p.string }) -- palettes may override the block color
+	-- Cursor block: `cursor` sets the block color, `cursor_text` the glyph under
+	-- it (falls back to bg = a dark cut-out). This drives the in-editor block AND,
+	-- via ghostty-mirror, the terminal cursor-color/cursor-text.
+	hl("Cursor", { fg = p.cursor_text or p.bg, bg = p.cursor or p.string })
 
 	-- Selection / search — elflord uses a grey Visual and reverse-video IncSearch;
 	-- set solid palette colors so they read correctly on any background. fg_visual
