@@ -109,6 +109,28 @@ nvim --headless --clean --cmd "set rtp+=$PWD" -c "colorscheme stargum" \
 Confirm: syntax categories are distinct, `FloatBorder` is gold, `Visual`
 selected-text is readable, and the UI accent reads on dark selections.
 
+## Sample screenshots (README gallery)
+
+The README's Showcase section has a `###` sub-section per variant — a flower/star
+emoji + `` `stargum[-<variant>]` `` heading, then a two-column `tsx | ex` table
+holding `samples/screenshots/<variant>-tsx.png` and `<variant>-ex.png`, each
+`samples/showcase.*` rendered with treesitter highlighting. **Whenever a change
+visibly alters the theme** (a palette edit, a new variant, or any shared-core
+change that shifts colors), regenerate the gallery so the README stays truthful:
+
+```sh
+samples/render.sh            # all variants (auto-discovered from palettes/)
+samples/render.sh stargum    # only the named ones
+```
+
+The script drives `nvim :TOhtml` → headless Google Chrome → ImageMagick (no live
+GUI screenshot). The default palette `stargum` renders as colorscheme `stargum`;
+other variants render as `stargum-<variant>`. When you **add a variant**, also add
+a `###` sub-section to the README. When you **add a syntax construct worth
+showing**, extend the two `showcase.*` files (keep them exercising the full set:
+modules, functions, keys/atoms, strings, types, constants, numbers, comments) and
+re-run. Commit the regenerated PNGs alongside the palette change.
+
 ## Ghostty port
 
 Port to Ghostty via the `port-nvim-theme-to-ghostty` skill once a palette
