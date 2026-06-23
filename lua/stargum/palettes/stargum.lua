@@ -29,8 +29,8 @@ return {
 	bg_visual      = "#3d2c5a", -- dark violet selection; syntax colors show through and stay readable
 	-- fg_visual omitted on purpose: with no fg override the selected text keeps
 	-- its per-token syntax colors instead of flattening to one flat color.
-	bg_statusline  = "#d61f8f", -- deep bubblegum status bar (the brand, full-width)
-	fg_statusline  = "#fff4fb", -- near-white text on the deep pink bar
+	bg_statusline  = "#ff45c0", -- bright bubblegum status bar (the brand, full-width)
+	fg_statusline  = "#fff4fb", -- near-white text on the bright pink bar
 
 	-- Text — soft white with a faint violet tint so it reads as "space," not gray.
 	fg_normal      = "#f0eaff",
