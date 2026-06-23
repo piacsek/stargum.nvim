@@ -74,9 +74,10 @@ function M.apply(name, p)
 
 	-- ── Surfaces zaibatsu leaves bright/white ───────────────────────────────
 	-- Statusline: tone down zaibatsu's bright white statusline. Optional
-	-- `bg_statusline` lets a variant give the bar its own surface; falls back to
-	-- bg_active so other variants are unchanged.
-	hl("StatusLine", { fg = p.fg_bright, bg = p.bg_statusline or p.bg_active })
+	-- `bg_statusline` lets a variant give the bar its own surface (falls back to
+	-- bg_active), and `fg_statusline` its own text color (falls back to fg_bright)
+	-- — e.g. dark text on a bright bar.
+	hl("StatusLine", { fg = p.fg_statusline or p.fg_bright, bg = p.bg_statusline or p.bg_active })
 	hl("StatusLineNC", { fg = p.fg_dim, bg = p.bg_dim })
 
 	-- ── Terminal (ANSI) palette ─────────────────────────────────────────────

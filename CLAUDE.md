@@ -23,8 +23,9 @@ added later as `stargum-<variant>`.
   define the full semantic key contract (see `stargum.lua` for the canonical
   list: surfaces, text, syntax, accents). Optional keys: `cursor` (overrides the
   `Cursor` block color, else derives from `string`), `bg_statusline` (a dedicated
-  StatusLine background, else `bg_active`), and `ansi` (a 0–15-keyed table
-  overriding `g:terminal_color_*`).
+  StatusLine background, else `bg_active`), `fg_statusline` (StatusLine text,
+  else `fg_bright` — e.g. dark text on a bright bar), and `ansi` (a 0–15-keyed
+  table overriding `g:terminal_color_*`).
 - `colors/stargum.lua` — one line: `require("stargum").load("stargum")`.
 
 Adding a variant = a new palette file + a one-line colors file. No core changes.

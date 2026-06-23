@@ -28,6 +28,8 @@ return {
 	bg_colorcolumn = "#1f0f38",
 	bg_visual      = "#ff5fc4", -- vivid bubblegum selection (punchy, on-brand)
 	fg_visual      = "#1a0418", -- near-black plum text on the bright pink selection
+	bg_statusline  = "#ff45c0", -- bright bubblegum status bar (the brand, full-width)
+	fg_statusline  = "#1a0418", -- near-black text on the bright pink bar
 
 	-- Text — soft white with a faint violet tint so it reads as "space," not gray.
 	fg_normal      = "#f0eaff",
