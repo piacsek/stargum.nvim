@@ -23,7 +23,7 @@ return {
 	bg_winbar      = "#fbe7f3",
 	bg_cursorline  = "#fce8f4",
 	bg_colorcolumn = "#f6d7ec",
-	bg_visual      = "#ffd3ee", -- light pink selection; deep syntax shows through and stays readable
+	bg_visual      = "#fff0a5", -- light-yellow selection; deep syntax shows through and stays readable
 	-- fg_visual omitted: selected text keeps its per-token (deep) syntax colors.
 	bg_statusline  = "#f7d4e8", -- soft light-pink bar (diamond-style: a subtle surface, not a loud color)
 	fg_statusline  = "#1a0614", -- darkest plum text on the soft bar; also colors the diagnostic counts
