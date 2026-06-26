@@ -28,8 +28,8 @@ return {
 	bg_cursorline  = "#1f1738",
 	bg_colorcolumn = "#1f0f38",
 	bg_visual      = "#5a4500", -- deep gold selection (bg-only; yellow-family highlighter, dark enough that the neon tokens read through it)
-	bg_statusline  = "#ff45c0", -- bright bubblegum status bar (the brand, full-width)
-	fg_statusline  = "#fff4fb", -- near-white text on the bright pink bar
+	bg_statusline  = "#d4589e", -- softened bubblegum status bar (the brand, full-width)
+	fg_statusline  = "#fff4fb", -- near-white text on the pink bar
 
 	-- Text — soft white with a faint violet tint so it reads as "space," not gray.
 	fg_normal      = "#f0eaff",
@@ -38,45 +38,46 @@ return {
 	fg_dim         = "#a79cc2",
 	fg_bright      = "#f9f5ff",
 
-	-- Syntax — GLARING neon violet/pink core with electric-cyan relief
+	-- Syntax — softened (muted) neon violet/pink core with cyan relief
 	-- (string/type/key carry the cool side; keyword/func/module/special carry the
-	-- pink-violet side). Pushed near the gamut edge to match elflord's intensity.
-	comment        = "#847aa6", -- muted violet-grey (recessive, but readable on black)
-	string         = "#00ffc8", -- glaring spring cyan-green (literals/numbers/booleans)
-	variable       = "#e3baff", -- bright lavender (frequent token, stays legible)
-	keyword        = "#ff1493", -- glaring deep hot pink (Statement/Keyword — pops hardest)
-	type           = "#00e5ff", -- glaring electric cyan (the cybernetic edge)
-	special        = "#ff5cd2", -- bright pink
-	preproc        = "#5c7cff", -- electric periwinkle blue
+	-- pink-violet side). Pulled back from the gamut edge so it's easy on the eyes
+	-- while keeping the bubblegum × space identity.
+	comment        = "#7d7398", -- muted violet-grey (recessive, but readable)
+	string         = "#5fd1ab", -- soft teal-green (literals/numbers/booleans)
+	variable       = "#cdb6e2", -- soft lavender (frequent token, stays legible)
+	keyword        = "#e76aa3", -- rose-pink (Statement/Keyword — pops, not glaring)
+	type           = "#5fc4d8", -- soft cyan (the cybernetic edge)
+	special        = "#db86c0", -- soft pink
+	preproc        = "#7d92dd", -- muted periwinkle blue
 
 	-- Syntax accents
-	func           = "#f23bff", -- glaring magenta-orchid (functions)
-	module         = "#ffd84a", -- glaring gold-yellow (bold modules/classes/tags) — the yellow accent
-	key            = "#4df3ff", -- glaring pale cyan (atoms / map keys / properties)
-	constant       = "#d68cff", -- bright violet (Elixir module attrs)
+	func           = "#c98ad4", -- soft orchid (functions)
+	module         = "#dcbb63", -- soft gold (bold modules/classes/tags) — the yellow accent
+	key            = "#8ad4de", -- soft pale cyan (atoms / map keys / properties)
+	constant       = "#c29fda", -- soft violet (Elixir module attrs)
 
 	-- UI accents
-	cursor         = "#ffd84a", -- gold-yellow block cursor (matches the module/class accent)
-	cursor_text    = "#1a0820", -- deep-plum glyph: dark enough to read on the yellow block
-	accent         = "#ff2fb0", -- glaring bubblegum (primary UI accent — pink is the star)
-	match          = "#00ffd5", -- glaring cyan (completion match — cool relief)
+	cursor         = "#dcbb63", -- soft gold block cursor (matches the module/class accent)
+	cursor_text    = "#1a0820", -- deep-plum glyph: dark enough to read on the gold block
+	accent         = "#d96aa4", -- softened bubblegum (primary UI accent — pink is the star)
+	match          = "#62ccb4", -- soft cyan (completion match — cool relief)
 	border         = "#d2ab5a", -- muted gold (float borders + window separators)
 
-	-- Diagnostics — vivid fg that reads on the black editor; the core gives the
-	-- *sign* groups a black bg so the diagnostic counts in the (pink) statusline
-	-- render as readable dark-backed segments instead of red-on-pink.
-	diag_error     = "#ff2d6a", -- red
-	diag_warn      = "#ffb02e", -- amber (distinct from the gold-yellow modules)
-	diag_info      = "#00e5ff", -- cyan
-	diag_hint      = "#7fdcc0", -- muted teal
+	-- Diagnostics — toned fg that reads on the editor bg; the core gives the
+	-- *sign* groups the statusline fg so the diagnostic counts in the (pink)
+	-- statusline render readably instead of red-on-pink.
+	diag_error     = "#e05f7c", -- red
+	diag_warn      = "#d9a256", -- amber (distinct from the gold modules)
+	diag_info      = "#5fc4d8", -- cyan
+	diag_hint      = "#79c4ad", -- muted teal
 
 	-- Terminal ANSI palette — hand-tuned so red/green/blue read correctly in
 	-- :terminal even though the syntax palette is anchored on the pink-violet
-	-- family. Slot 0 lifts to bg_dim via the core. Vivid to match the theme.
+	-- family. Slot 0 lifts to bg_dim via the core. Toned to match the theme.
 	ansi = {
-		[1] = "#ff2d6a", [2] = "#00ffa0", [3] = "#ffcf3d", [4] = "#5c7cff",
-		[5] = "#ff1493", [6] = "#00e5ff", [7] = "#dcd6ec", [8] = "#847aa6",
-		[9] = "#ff5c87", [10] = "#4dffc0", [11] = "#ffe066", [12] = "#8aa0ff",
-		[13] = "#ff5cd2", [14] = "#5cf3ff", [15] = "#f9f5ff",
+		[1] = "#e05f7c", [2] = "#5fcf9e", [3] = "#d9b85f", [4] = "#7d92dd",
+		[5] = "#e76aa3", [6] = "#5fc4d8", [7] = "#dcd6ec", [8] = "#847aa6",
+		[9] = "#e87f9b", [10] = "#7fd9bc", [11] = "#e6cd83", [12] = "#a0b0e8",
+		[13] = "#db86c0", [14] = "#8ad4de", [15] = "#f9f5ff",
 	},
 }
