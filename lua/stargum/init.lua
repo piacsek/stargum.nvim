@@ -66,6 +66,7 @@ function M.apply(name, p)
 	hl("Search", { fg = p.bg, bg = p.variable })
 	hl("IncSearch", { fg = p.bg, bg = p.func })
 	hl("CurSearch", { link = "IncSearch" })
+	hl("QuickFixLine", { link = "Visual" }) -- quickfix selection reads as the selection tone, not elflord's default
 
 	-- ── Core syntax ─────────────────────────────────────────────────────────
 	-- elflord links String/Number/Boolean/Float→Constant, Keyword/Label→Statement,
