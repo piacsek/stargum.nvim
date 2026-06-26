@@ -16,15 +16,16 @@
 --   fg_muted if omitted, but stargum's whole point is the gold edge — keep it.
 
 return {
-	-- Surfaces — pure-black space. The interactive surfaces lift just off black
-	-- toward violet so accents sit alive against them without graying the void.
-	bg             = "#000000",
-	bg_float       = "#120a1f",
-	bg_inactive    = "#0a0712",
-	bg_dim         = "#1c1230",
-	bg_active      = "#2c1c48", -- selection/menu surface; `accent` reads on it
-	bg_winbar      = "#0f0a1c",
-	bg_cursorline  = "#140e24",
+	-- Surfaces — near-black violet-charcoal space. Lifted off pure #000 to ease
+	-- eye strain (pure black haloes under the glaring neon); still deep enough
+	-- that the tokens pop. Interactive surfaces lift further toward violet.
+	bg             = "#14101e",
+	bg_float       = "#1c1330",
+	bg_inactive    = "#100c19",
+	bg_dim         = "#241a3c",
+	bg_active      = "#33234f", -- selection/menu surface; `accent` reads on it
+	bg_winbar      = "#181126",
+	bg_cursorline  = "#1f1738",
 	bg_colorcolumn = "#1f0f38",
 	bg_visual      = "#5a4500", -- deep gold selection (bg-only; yellow-family highlighter, dark enough that the neon tokens read through it)
 	bg_statusline  = "#ff45c0", -- bright bubblegum status bar (the brand, full-width)
