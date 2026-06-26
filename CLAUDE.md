@@ -147,6 +147,24 @@ terminal even on a pink-violet theme. ANSI changes don't affect the README
 gallery (those render syntax, not `:terminal`), but they do change generated
 Ghostty theme files — regenerate via the mirror after editing.
 
+## Completion-menu selection (nvim-cmp routing gotcha)
+
+If the selected row in the completion popup looks invisible/too subtle, **check
+the consumer's nvim-cmp `winhighlight` before touching the palette.** The
+selected row's color is NOT necessarily `PmenuSel`: nvim-cmp enables `cursorline`
+in its window and relies on its default `winhighlight` containing
+`CursorLine:PmenuSel` to route the selected line to `PmenuSel`. If a user's
+config overrides `winhighlight` and drops that mapping (e.g.
+`"Normal:Pmenu,FloatBorder:Pmenu,Search:None"`), the selection falls back to the
+real `CursorLine` (= `bg_cursorline`, a near-invisible subtle tint) and **every
+`PmenuSel` palette edit has zero effect**. Fix is in the consumer config — add
+`CursorLine:PmenuSel` back to `winhighlight` — not in the theme. (We chased this
+through three palette edits before spotting it.)
+
+Independently, the theme's own `PmenuSel` uses `bg_visual` (the gold/yellow
+selection color), not `bg_active`: a different *hue* from the violet popup reads
+as obviously selected where a same-hue brightness bump did not.
+
 ## Hard rules
 
 - **Never patch downloaded/installed library code** (anything under
