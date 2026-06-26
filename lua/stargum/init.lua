@@ -136,15 +136,18 @@ function M.apply(name, p)
 	hl("FloatBorder", { fg = border, bg = p.bg_float })
 	hl("FloatTitle", { fg = p.accent, bg = p.bg_float, bold = true })
 
-	-- Completion popup (LSP, nvim-cmp, blink)
+	-- Completion popup (LSP, nvim-cmp, blink). The selected row uses `bg_visual`
+	-- (the gold/yellow selection color) rather than bg_active: a different HUE
+	-- from the violet popup makes the selection obvious where a same-hue brightness
+	-- bump read as too subtle, and it unifies the selection identity with Visual.
 	hl("Pmenu", { fg = p.fg, bg = p.bg_float })
-	hl("PmenuSel", { fg = p.accent, bg = p.bg_active, bold = true })
+	hl("PmenuSel", { fg = p.fg_bright, bg = p.bg_visual, bold = true })
 	hl("PmenuKind", { fg = p.fg_muted, bg = p.bg_float })
-	hl("PmenuKindSel", { fg = p.fg_muted, bg = p.bg_active })
+	hl("PmenuKindSel", { fg = p.fg_bright, bg = p.bg_visual })
 	hl("PmenuExtra", { fg = p.fg_muted, bg = p.bg_float })
-	hl("PmenuExtraSel", { fg = p.fg_muted, bg = p.bg_active })
+	hl("PmenuExtraSel", { fg = p.fg_bright, bg = p.bg_visual })
 	hl("PmenuMatch", { fg = p.match, bg = p.bg_float, bold = true })
-	hl("PmenuMatchSel", { fg = p.match, bg = p.bg_active, bold = true })
+	hl("PmenuMatchSel", { fg = p.accent, bg = p.bg_visual, bold = true })
 	hl("PmenuSbar", { bg = p.bg_dim })
 	hl("PmenuThumb", { bg = p.fg_muted })
 
