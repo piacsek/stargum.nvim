@@ -19,7 +19,7 @@ return {
 	bg_float       = "#fbe7f3",
 	bg_inactive    = "#f6ecf2",
 	bg_dim         = "#f0dcea",
-	bg_active      = "#f6d7ec", -- selection/menu surface; deep `accent` reads on it
+	bg_active      = "#edbcdf", -- selection/menu surface; deep enough to read against the pale popup bg; deep `accent` reads on it
 	bg_winbar      = "#fbe7f3",
 	bg_cursorline  = "#fce8f4",
 	bg_colorcolumn = "#f6d7ec",
