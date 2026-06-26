@@ -23,7 +23,7 @@ return {
 	bg_float       = "#1c1330",
 	bg_inactive    = "#100c19",
 	bg_dim         = "#241a3c",
-	bg_active      = "#33234f", -- selection/menu surface; `accent` reads on it
+	bg_active      = "#4a3672", -- selection/menu surface; clearly lifted off bg_float so PmenuSel/TabLineSel read; `accent` reads on it
 	bg_winbar      = "#181126",
 	bg_cursorline  = "#1f1738",
 	bg_colorcolumn = "#1f0f38",
