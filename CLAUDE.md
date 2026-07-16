@@ -243,6 +243,10 @@ regen.) The README gallery is unaffected — it renders syntax, not `:terminal`.
 
 Develop in `~/projects/stargum.nvim`. Consumed via `vim.pack` from
 `piacsek/stargum.nvim`; the installed copy lives at
-`~/.local/share/nvim/site/pack/core/opt/stargum.nvim`. After pushing, the
-installed clone can be fast-forwarded (`git fetch && git checkout <sha>`) —
-`vim.pack.update()` opens a confirmation buffer that must be `:w`-saved to apply.
+`~/.local/share/nvim/site/pack/core/opt/stargum.nvim`. After pushing, refresh the
+installed copy **via `vim.pack` — never a manual `git pull`/`git checkout` in the
+installed clone.** Run `vim.pack.update()`, which opens a confirmation buffer that
+must be `:w`-saved to apply. Don't hand-fast-forward the clone: `:checkhealth`
+analyzes the `vim.pack` lock file and reports a version diff when the installed
+tree and the lock file disagree, which a manual git pull produces. Let `vim.pack`
+own the update so the lock file stays consistent.
