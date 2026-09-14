@@ -43,8 +43,38 @@ keep the vivid `diag_*` hues, so inline severity color is preserved. This is a
 deliberate consequence of the bright bar; revisit if `bg_statusline` ever goes
 dark (then vivid `diag_*` signs read fine and the override can be dropped).
 - `colors/stargum.lua` — one line: `require("stargum").load("stargum")`.
+- `lua/stargum/lualine.lua` — `M.theme(variant)` builds a lualine theme from a
+  palette. `lua/lualine/themes/stargum.lua` and `stargum-light.lua` are one-liners
+  calling it (see "lualine theme" below).
 
-Adding a variant = a new palette file + a one-line colors file. No core changes.
+Adding a variant = a new palette file + a one-line colors file + a one-line
+lualine theme file. No core changes.
+
+## lualine theme (why we ship one)
+
+lualine's `theme = "auto"` only derives colors from highlight groups when no
+`lua/lualine/themes/<colors_name>.lua` exists on the runtimepath. The derivation
+is ugly for stargum: the mode block takes `PmenuSel`'s bg (our deep-gold
+`bg_visual`), gets lightened 10% into a muddy olive, and the text is
+force-darkened to grey for contrast. So every variant ships a lualine theme
+generated from its palette by `lua/stargum/lualine.lua`:
+
+- `a`/`z` (mode, location): `cursor` bg with `cursor_text` text, bold — the
+  cursor pair already guarantees contrast. Per mode: normal=`cursor`,
+  insert=`string`, visual=`func`, replace=`diag_error`, command=`type`,
+  terminal=`key`.
+- `b`/`y`: `bg_active` with the mode color as text.
+- `c`/`x`: the brand bar, identical to `StatusLine` (`bg_statusline` /
+  `fg_statusline`). Inactive = `StatusLineNC` (`bg_dim` / `fg_dim`).
+
+The theme file name must equal the colorscheme name (`stargum-<variant>`), or
+`auto` silently falls back to the derived colors. Consumers keep `theme = "auto"`
+so the bar follows colorscheme switches.
+
+Known gap: lualine's `diagnostics` component colors counts with `DiagnosticError`
+etc. (vivid `diag_*` fg), which reads poorly on the pink bar — the same problem
+the core solves for the default statusline via `DiagnosticSign*`. That is
+consumer config: point `diagnostics_color` at the `DiagnosticSign*` groups.
 
 ## Base: elflord (and its quirks the core must neutralize)
 
