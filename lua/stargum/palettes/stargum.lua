@@ -63,8 +63,8 @@ return {
 	constant       = "#c29fda", -- soft violet (Elixir module attrs)
 
 	-- UI accents
-	cursor         = "#5fc4d8", -- electric-cyan block cursor (the cybernetic edge; gold read as a warning highlighter under the glyph)
-	cursor_text    = "#14101e", -- deep-space glyph on the cyan block (same as bg, so the cursor reads as a cut-out of the sky)
+	cursor         = "#107b95", -- deep electric-cyan block cursor: deep enough that a LIGHT glyph holds 4.6:1 (the bright #5fc4d8 forced a black glyph, which read as black-on-cyan)
+	cursor_text    = "#fff4fb", -- light glyph on the cyan block — the character under the cursor reads like normal text
 	accent         = "#d96aa4", -- softened bubblegum (primary UI accent — pink is the star)
 	match          = "#62ccb4", -- soft cyan (completion match — cool relief)
 	border         = "#d2ab5a", -- muted gold (float borders + window separators)

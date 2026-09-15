@@ -39,9 +39,12 @@ added later as `stargum-<variant>`.
 `bg_search`, `fg_bright` on it) and `CurSearch`/`IncSearch` a **bold brand-pink
 block with a light glyph**. The earlier form — `fg = bg` on a light syntax color
 (`variable`/`func`) — inverted the dark theme into pale blobs and read as odd.
-Same rule for the cursor: the default is an **electric-cyan block** with a
-deep-space glyph (`cursor_text = bg`); the gold cursor read as a black-on-yellow
-warning highlighter under the glyph. `Visual` follows the same rule: a deep
+Same rule for the cursor: the default is a **deep electric-cyan block
+(`#107b95`) with a light glyph** (4.6:1). The gold cursor read as a
+black-on-yellow warning highlighter, and the brighter cyan `#5fc4d8` forced a
+black glyph that read as black-on-cyan — the block must be deep enough that the
+character under the cursor reads like normal (light) text. The contrast audit
+holds `Cursor` to 4.5:1. `Visual` follows the same rule: a deep
 magenta-plum bg-only tint (`#4d1f45`), not the earlier deep-gold highlighter,
 which read as a brown stripe on the violet theme. Gold stays on
 borders/modules/`command` mode only. The three selection-ish surfaces stay
@@ -125,8 +128,10 @@ lightens it 10% into a muddy tone, and the text is
 force-darkened to grey for contrast. So every variant ships a lualine theme
 generated from its palette by `lua/stargum/lualine.lua`:
 
-- `a`/`z` (mode, location): `cursor` bg with `cursor_text` text, bold — the
-  cursor pair already guarantees contrast. Per mode: normal=`cursor`,
+- `a`/`z` (mode, location): one palette color per mode as the bg, bold, with
+  the text picked per block by luminance (`fg_bright` on a dark block such as
+  the deep-cyan cursor, `bg` on a light one such as teal/orchid/gold). Per
+  mode: normal=`cursor`,
   insert=`string`, visual=`func`, replace=`diag_error`, command=`module`
   (gold — not `type`, which would be indistinguishable from the cyan cursor in
   normal mode), terminal=`key`.

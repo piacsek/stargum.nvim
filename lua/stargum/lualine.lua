@@ -8,8 +8,10 @@
 -- theme built from its own palette instead.
 --
 -- Layout (globalstatus or not):
---   a/z  mode + location blocks: the palette's `cursor` color with `cursor_text`
---        on it (the cursor pair already guarantees contrast), one color per mode.
+--   a/z  mode + location blocks: one palette color per mode as the bg, with the
+--        text picked per block by luminance — `cursor_text` on a dark block (the
+--        deep-cyan cursor), `bg` on a light one (teal/orchid/gold) — so every
+--        mode block keeps contrast regardless of which way the cursor pair goes.
 --   b/y  `bg_active` with the mode color as text.
 --   c/x  the brand bar: `bg_statusline` / `fg_statusline`, same as StatusLine.
 --   inactive: StatusLineNC (`bg_dim` / `fg_dim`).
@@ -20,12 +22,28 @@ local M = {}
 function M.theme(variant)
 	local p = require("stargum.palettes." .. variant)
 
-	local block_fg = p.cursor_text or p.bg
 	local bar = { bg = p.bg_statusline or p.bg_active, fg = p.fg_statusline or p.fg_bright }
+
+	local function lum(hex)
+		local function ch(i)
+			local c = tonumber(hex:sub(i, i + 1), 16) / 255
+			return c <= 0.03928 and c / 12.92 or ((c + 0.055) / 1.055) ^ 2.4
+		end
+		return 0.2126 * ch(2) + 0.7152 * ch(4) + 0.0722 * ch(6)
+	end
+	-- Pick whichever of the two text candidates contrasts more with the block.
+	local light_text = p.fg_bright
+	local dark_text = p.bg
+	if lum(light_text) < lum(dark_text) then
+		light_text, dark_text = dark_text, light_text
+	end
+	local function block_fg(color)
+		return lum(color) > 0.18 and dark_text or light_text
+	end
 
 	local function mode(color)
 		return {
-			a = { bg = color, fg = block_fg, gui = "bold" },
+			a = { bg = color, fg = block_fg(color), gui = "bold" },
 			b = { bg = p.bg_active, fg = color },
 			c = bar,
 		}
