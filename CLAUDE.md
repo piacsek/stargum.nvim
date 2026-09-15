@@ -28,7 +28,24 @@ added later as `stargum-<variant>`.
   StatusLine background, else `bg_active`), `fg_statusline` (StatusLine text,
   else `fg_bright` — e.g. dark text on a bright bar), `diag_error`/`diag_warn`/
   `diag_info`/`diag_hint` (diagnostic fg colors; fall back to keyword/accent/
-  type/comment), and `ansi` (a 0–15-keyed table overriding `g:terminal_color_*`).
+  type/comment), `bg_search`/`fg_search` (the `Search` tint + text; fall back to
+  `bg_active`/`fg_bright`), `bg_search_cur`/`fg_search_cur` (`CurSearch`/
+  `IncSearch`, the match under the cursor; fall back to `accent`/`bg`), and
+  `ansi` (a 0–15-keyed table overriding `g:terminal_color_*`).
+
+### Search + cursor (no dark-on-pastel blocks)
+
+`Search` is a **tinted surface with bright text** (default: deep teal
+`bg_search`, `fg_bright` on it) and `CurSearch`/`IncSearch` a **bold brand-pink
+block with a light glyph**. The earlier form — `fg = bg` on a light syntax color
+(`variable`/`func`) — inverted the dark theme into pale blobs and read as odd.
+Same rule for the cursor: the default is an **electric-cyan block** with a
+deep-space glyph (`cursor_text = bg`); the gold cursor read as a black-on-yellow
+warning highlighter under the glyph. `Visual` follows the same rule: a deep
+magenta-plum bg-only tint (`#4d1f45`), not the earlier deep-gold highlighter,
+which read as a brown stripe on the violet theme. Gold stays on
+borders/modules/`command` mode only. The three selection-ish surfaces stay
+hue-distinct: plum `Visual`/`PmenuSel`, teal `Search`, violet `Pmenu`/`bg_active`.
 
 ### Diagnostics on the pink statusline
 
@@ -54,15 +71,16 @@ lualine theme file. No core changes.
 
 lualine's `theme = "auto"` only derives colors from highlight groups when no
 `lua/lualine/themes/<colors_name>.lua` exists on the runtimepath. The derivation
-is ugly for stargum: the mode block takes `PmenuSel`'s bg (our deep-gold
-`bg_visual`), gets lightened 10% into a muddy olive, and the text is
+is ugly for stargum: the mode block takes `PmenuSel`'s bg (our `bg_visual`),
+lightens it 10% into a muddy tone, and the text is
 force-darkened to grey for contrast. So every variant ships a lualine theme
 generated from its palette by `lua/stargum/lualine.lua`:
 
 - `a`/`z` (mode, location): `cursor` bg with `cursor_text` text, bold — the
   cursor pair already guarantees contrast. Per mode: normal=`cursor`,
-  insert=`string`, visual=`func`, replace=`diag_error`, command=`type`,
-  terminal=`key`.
+  insert=`string`, visual=`func`, replace=`diag_error`, command=`module`
+  (gold — not `type`, which would be indistinguishable from the cyan cursor in
+  normal mode), terminal=`key`.
 - `b`/`y`: `bg_active` with the mode color as text.
 - `c`/`x`: the brand bar, identical to `StatusLine` (`bg_statusline` /
   `fg_statusline`). Inactive = `StatusLineNC` (`bg_dim` / `fg_dim`).
@@ -123,8 +141,8 @@ slots, so it reads as structure, not syntax.
 `fg_visual` is **optional** and the default omits it: with no fg override the
 Visual selection only sets `bg_visual`, so selected text keeps its per-token
 syntax colors instead of flattening to one flat color. This means `bg_visual`
-must be a dark, low-saturation surface the vivid syntax hues read on (the default
-is a dark violet `#3d2c5a`) — a bright selection bg would swallow same-hue tokens.
+must be a dark surface the vivid syntax hues read on (the default is a deep
+magenta-plum `#4d1f45`) — a bright selection bg would swallow same-hue tokens.
 Only set `fg_visual` for a light selection that genuinely needs dark text.
 
 ### Light variant (`stargum-light`)
@@ -135,7 +153,8 @@ Only set `fg_visual` for a light selection that genuinely needs dark text.
 changes. In a light palette:
 - **Every syntax + UI-accent color must be deep/saturated** — each is used either
   as a foreground on a light surface or as the dark backdrop behind the light
-  `bg` (`Search`→`variable`, `IncSearch`→`func`, `Cursor`→`cursor`). Pale syntax
+  `bg` (`IncSearch`→`accent`, `Cursor`→`cursor`; `Search` sits on `bg_active`
+  with `fg_bright`, the darkest text). Pale syntax
   would vanish in both roles. Only surfaces, `comment`, `fg_muted`, `fg_dim` go
   light.
 - **`fg_bright` is the *darkest* text**, not the lightest — it's the statusline
@@ -191,7 +210,7 @@ real `CursorLine` (= `bg_cursorline`, a near-invisible subtle tint) and **every
 `CursorLine:PmenuSel` back to `winhighlight` — not in the theme. (We chased this
 through three palette edits before spotting it.)
 
-Independently, the theme's own `PmenuSel` uses `bg_visual` (the gold/yellow
+Independently, the theme's own `PmenuSel` uses `bg_visual` (the magenta-plum
 selection color), not `bg_active`: a different *hue* from the violet popup reads
 as obviously selected where a same-hue brightness bump did not.
 

@@ -63,8 +63,14 @@ function M.apply(name, p)
 	-- the selected text keeps its per-token syntax colors instead of flattening to
 	-- one color. Set it only for a light selection that needs dark text.
 	hl("Visual", { fg = p.fg_visual, bg = p.bg_visual })
-	hl("Search", { fg = p.bg, bg = p.variable })
-	hl("IncSearch", { fg = p.bg, bg = p.func })
+	-- Search matches: a tinted surface with bright text (`bg_search`, falls back to
+	-- `bg_active`; `fg_search` falls back to `fg_bright`) instead of dark text on a
+	-- light syntax color, which inverted the dark theme into pale blobs. The match
+	-- under the cursor (CurSearch/IncSearch) is a bold block in the brand pink with
+	-- a light glyph (`bg_search_cur` / `fg_search_cur`, falling back to
+	-- `accent` / `bg`) so it is unmistakably "the current one".
+	hl("Search", { fg = p.fg_search or p.fg_bright, bg = p.bg_search or p.bg_active })
+	hl("IncSearch", { fg = p.fg_search_cur or p.bg, bg = p.bg_search_cur or p.accent, bold = true })
 	hl("CurSearch", { link = "IncSearch" })
 	hl("QuickFixLine", { link = "Visual" }) -- quickfix selection reads as the selection tone, not elflord's default
 
@@ -137,7 +143,7 @@ function M.apply(name, p)
 	hl("FloatTitle", { fg = p.accent, bg = p.bg_float, bold = true })
 
 	-- Completion popup (LSP, nvim-cmp, blink). The selected row uses `bg_visual`
-	-- (the gold/yellow selection color) rather than bg_active: a different HUE
+	-- (the magenta-plum selection color) rather than bg_active: a different HUE
 	-- from the violet popup makes the selection obvious where a same-hue brightness
 	-- bump read as too subtle, and it unifies the selection identity with Visual.
 	hl("Pmenu", { fg = p.fg, bg = p.bg_float })

@@ -3,8 +3,8 @@
 -- lualine's `theme = "auto"` first looks for `lua/lualine/themes/<colors_name>.lua`
 -- on the runtimepath and only falls back to deriving colors from highlight
 -- groups when none exists. The derivation is ugly for stargum: it takes the mode
--- block from `PmenuSel`'s bg (our deep-gold `bg_visual`), lightens it 10% into a
--- muddy olive, then force-darkens the text for contrast. So each variant ships a
+-- block from `PmenuSel`'s bg (our `bg_visual`), lightens it 10% into a muddy
+-- tone, then force-darkens the text for contrast. So each variant ships a
 -- theme built from its own palette instead.
 --
 -- Layout (globalstatus or not):
@@ -36,7 +36,7 @@ function M.theme(variant)
 		insert = mode(p.string),
 		visual = mode(p.func),
 		replace = mode(p.diag_error or p.keyword),
-		command = mode(p.type),
+		command = mode(p.module), -- gold, not `type`: the cyan cursor already owns normal mode
 		terminal = mode(p.key),
 		inactive = {
 			a = { bg = p.bg_dim, fg = p.fg_dim, gui = "bold" },

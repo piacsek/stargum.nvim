@@ -11,9 +11,12 @@
 --   Syntax:    comment string variable keyword type special preproc
 --              func module key constant
 --   Accents:   accent (primary UI)  match (completion match)  border (gold borders)
--- Optional keys: cursor, ansi, and bg_statusline (a dedicated StatusLine
---   background; falls back to bg_active when absent). `border` falls back to
---   fg_muted if omitted, but stargum's whole point is the gold edge — keep it.
+-- Optional keys: cursor, cursor_text, ansi, bg_statusline/fg_statusline (a
+--   dedicated StatusLine surface; fall back to bg_active/fg_bright), and the
+--   search pair bg_search/fg_search (Search; fall back to bg_active/fg_bright)
+--   + bg_search_cur/fg_search_cur (CurSearch/IncSearch; fall back to accent/bg).
+--   `border` falls back to fg_muted if omitted, but stargum's whole point is the
+--   gold edge — keep it.
 
 return {
 	-- Surfaces — near-black violet-charcoal space. Lifted off pure #000 to ease
@@ -27,7 +30,10 @@ return {
 	bg_winbar      = "#181126",
 	bg_cursorline  = "#1f1738",
 	bg_colorcolumn = "#1f0f38",
-	bg_visual      = "#5a4500", -- deep gold selection (bg-only; yellow-family highlighter, dark enough that the neon tokens read through it)
+	bg_visual      = "#4d1f45", -- deep magenta-plum selection (bg-only; brand-pink family, dark enough that the neon tokens read through it; hue-distinct from the teal Search and the violet menus)
+	bg_search      = "#1b5a68", -- search-match tint: deep teal (the cool relief), bright text on it; a different hue from the gold Visual and the violet menus
+	bg_search_cur  = "#c94b8c", -- the match under the cursor: brand-pink block, a touch deeper than the statusline so the light glyph holds
+	fg_search_cur  = "#fff4fb", -- light glyph on the pink block (no dark cut-out)
 	bg_statusline  = "#d4589e", -- softened bubblegum status bar (the brand, full-width)
 	fg_statusline  = "#fff4fb", -- near-white text on the pink bar
 
@@ -57,8 +63,8 @@ return {
 	constant       = "#c29fda", -- soft violet (Elixir module attrs)
 
 	-- UI accents
-	cursor         = "#dcbb63", -- soft gold block cursor (matches the module/class accent)
-	cursor_text    = "#1a0820", -- deep-plum glyph: dark enough to read on the gold block
+	cursor         = "#5fc4d8", -- electric-cyan block cursor (the cybernetic edge; gold read as a warning highlighter under the glyph)
+	cursor_text    = "#14101e", -- deep-space glyph on the cyan block (same as bg, so the cursor reads as a cut-out of the sky)
 	accent         = "#d96aa4", -- softened bubblegum (primary UI accent — pink is the star)
 	match          = "#62ccb4", -- soft cyan (completion match — cool relief)
 	border         = "#d2ab5a", -- muted gold (float borders + window separators)

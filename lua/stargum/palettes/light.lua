@@ -7,7 +7,7 @@
 -- Light-variant rules (see CLAUDE.md "Light variants"):
 --   * Every syntax + UI-accent color is deep/saturated — each is used either as a
 --     fg on a light surface or as the dark backdrop behind the light `bg`
---     (Search→variable, IncSearch→func, Cursor→cursor). Pale would vanish in both.
+--     (Search→bg_active, IncSearch→accent, Cursor→cursor). Pale would vanish in both.
 --   * Only surfaces, comment, fg_muted, fg_dim go light.
 --   * fg_statusline is set (dark) so it reads on the pink bar AND so the
 --     DiagnosticSign* groups (which take fg_statusline) read on the light gutter.
