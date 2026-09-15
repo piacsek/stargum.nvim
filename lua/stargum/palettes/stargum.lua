@@ -30,7 +30,7 @@ return {
 	bg_winbar      = "#181126",
 	bg_cursorline  = "#1f1738",
 	bg_colorcolumn = "#1f0f38",
-	bg_visual      = "#4d1f45", -- deep magenta-plum selection (bg-only; brand-pink family, dark enough that the neon tokens read through it; hue-distinct from the teal Search and the violet menus)
+	bg_visual      = "#4b1e43", -- deep magenta-plum selection (bg-only; brand-pink family, dark enough that the neon tokens read through it; hue-distinct from the teal Search and the violet menus)
 	bg_search      = "#1b5a68", -- search-match tint: deep teal (the cool relief), bright text on it; a different hue from the gold Visual and the violet menus
 	bg_search_cur  = "#c94b8c", -- the match under the cursor: brand-pink block, a touch deeper than the statusline so the light glyph holds
 	fg_search_cur  = "#fff4fb", -- light glyph on the pink block (no dark cut-out)

@@ -47,6 +47,55 @@ which read as a brown stripe on the violet theme. Gold stays on
 borders/modules/`command` mode only. The three selection-ish surfaces stay
 hue-distinct: plum `Visual`/`PmenuSel`, teal `Search`, violet `Pmenu`/`bg_active`.
 
+### Derived tints (`blend` / `tint`)
+
+The core has `M.blend(fg, bg, alpha)` and an internal `tint(color, alpha)` =
+`blend(color, p.bg, alpha)` with the alpha **halved on a light background**
+(mixing a deep color into white darkens roughly twice as fast). Every bg-only
+surface that isn't a palette key is derived this way so variants don't hand-tune
+a dozen near-bg colors: `DiffAdd/Change/Delete/Text` (from ANSI green/blue and
+`diag_error`; optional overrides `bg_diff_add/change/delete`), `MatchParen`
+(accent tint — not `bg_active`, which the light `Search` sits on),
+`LspReferenceText/Read/Write` (cyan tint — references must NOT look like a
+`Visual` selection, which is what Neovim's default link does),
+`SnippetTabstop` (`func` tint), and the `RenderMarkdownH<n>Bg` heading bands.
+`LspSignatureActiveParameter` is bold accent text, no bg.
+
+Selected-row identity: `PmenuSel`, `TelescopeSelection`,
+`SnacksPickerListCursorLine` and `TabLineSel` all sit on `bg_visual`.
+
+### Markup + plugin coverage
+
+`@markup.heading.1..6` is a six-step ramp (`accent, func, type, string,
+module, key`), mirrored by `RenderMarkdownH1..6`. `@markup.raw` (inline code) =
+`string`, links = `key` with the URL in underlined `type`, `@markup.list` =
+`accent`, quotes = dim italic. `@variable.builtin` (`self`/`this`) = italic
+`constant`; `@type.builtin` = `type`; `@punctuation.*` and `@tag.delimiter` =
+`fg_dim` (recede); `@tag.attribute` = `key`. Plugin groups set: Telescope,
+snacks picker + indent, indent-blankline, gitsigns, render-markdown. Anything
+else falls to Neovim's default links (which mostly land on groups we own).
+
+### Contrast audit (run before committing a palette change)
+
+```sh
+nvim --headless --clean --cmd "set rtp+=$PWD" -l samples/contrast.lua stargum
+nvim --headless --clean --cmd "set rtp+=$PWD" -l samples/contrast.lua light
+```
+
+`samples/contrast.lua` computes WCAG ratios for every fg/bg block the theme
+emits and for every syntax token over every bg-only surface it can be painted
+on (selection, cursorline, popups, diff rows, LSP references…). Thresholds:
+4.5 for text you read (popup rows, cursor glyph, search text), 3.0 for UI
+chrome, bold accents, secondary text (bars, tabs, borders, line numbers,
+comments) and tokens on tints. Comments are exempt on transient tints (they
+recede by design). Both shipped variants pass with zero failures; keep it that
+way (`CONTRAST_VERBOSE=1` prints every pairing). It exits 1 on failure.
+
+### Palette contract validation
+
+`M.load` asserts every key in `M.required_keys` is present and errors with the
+list of missing ones. A missing key used to yield a silently wrong group.
+
 ### Diagnostics on the pink statusline
 
 Neovim 0.12's default statusline embeds `vim.diagnostic.status()` ("E:17 …"),
@@ -82,6 +131,7 @@ generated from its palette by `lua/stargum/lualine.lua`:
   (gold — not `type`, which would be indistinguishable from the cyan cursor in
   normal mode), terminal=`key`.
 - `b`/`y`: `bg_active` with the mode color as text.
+- `ModeMsg` (`-- INSERT --`) is bold `special` text, not a dark-on-pink block.
 - `c`/`x`: the brand bar, identical to `StatusLine` (`bg_statusline` /
   `fg_statusline`). Inactive = `StatusLineNC` (`bg_dim` / `fg_dim`).
 
@@ -109,6 +159,13 @@ the core explicitly fixes these, so don't remove those lines:
   `Repeat` and `Conditional` to `keyword`.
 - **`SpecialKey` is glaring cyan** (whitespace/listchars). Core sets it to
   `fg_muted`.
+- **Pure-primary blocks**: `Todo` (blue on `#ffff00`), `Error`/`ErrorMsg`
+  (white on `#ff0000`), `Title` (bold `#ff00ff`), `Spell*` (primary
+  undercurls), `Underlined` (periwinkle), `StatusLineTerm` (black on light
+  green — the bar turned green in a focused `:terminal`), and `Diff*` rows that
+  force `fg = white`. The core sets all of them from the palette (see "Derived
+  tints" below for the diff rows). `Added/Changed/Removed` (what gitsigns links
+  to) come from the palette's ANSI green/blue and `diag_error`.
 - What still works like zaibatsu: `String/Number/Boolean/Float → Constant`,
   `Keyword/Label → Statement`, `Typedef/Structure/StorageClass → Type` — so
   setting those parents from the palette is enough.
@@ -148,7 +205,10 @@ Only set `fg_visual` for a light selection that genuinely needs dark text.
 ### Light variant (`stargum-light`)
 
 `stargum-light` ships (palette `lua/stargum/palettes/light.lua`, colors file
-`colors/stargum-light.lua`). The core's color math is background-agnostic, so a
+`colors/stargum-light.lua`). Its cursor is a deep cyan block with a light
+glyph, matching the dark variant's cyan cursor. `type`/`key`/`match`/`module`
+are deep enough to hold ~4.5:1 on the light bg (the earlier `#0091ad` cyan
+only reached 3.5:1 and failed on every tint). The core's color math is background-agnostic, so a
 **light** variant just inverts which palette roles are pale vs. deep — no core
 changes. In a light palette:
 - **Every syntax + UI-accent color must be deep/saturated** — each is used either
@@ -163,6 +223,7 @@ changes. In a light palette:
   dark-variant terminal-border contrast, but on a light variant `bg_dim` is pale
   and would make terminal "black" invisible.
 - The gold `border` likely needs to deepen so it reads on a light surface.
+- Tints derive at half alpha automatically (see "Derived tints").
 - The light statusline follows scintilla-diamond's lead: a **soft, subtle bar**
   (`bg_statusline` a light pink surface) with the **darkest** text, not a loud
   saturated color — the deep pink lives as the tmux active-window accent instead.

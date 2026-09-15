@@ -40,21 +40,21 @@ return {
 	string         = "#008a63", -- deep teal-green (literals/numbers/booleans)
 	variable       = "#6a3a86", -- deep plum-violet (frequent token, calm but dark)
 	keyword        = "#d80082", -- deep hot bubblegum (Statement/Keyword — pops hardest)
-	type           = "#0091ad", -- deep electric cyan (the cybernetic edge)
+	type           = "#007a94", -- deep electric cyan (the cybernetic edge; deep enough to hold 4.5:1 on the light bg)
 	special        = "#c61f88", -- deep pink
 	preproc        = "#3f4fd0", -- deep periwinkle blue
 
 	-- Syntax accents
 	func           = "#ad1fce", -- deep magenta-orchid (functions)
-	module         = "#a87400", -- deep gold (bold modules/classes/tags) — the yellow accent, light-side
-	key            = "#0b86b8", -- deep cyan (atoms / map keys / properties)
+	module         = "#9a6a00", -- deep gold (bold modules/classes/tags) — the yellow accent, light-side
+	key            = "#0a7aa8", -- deep cyan (atoms / map keys / properties)
 	constant       = "#7d33c4", -- deep violet (Elixir module attrs)
 
 	-- UI accents
-	cursor         = "#8a5e00", -- deep gold block cursor (visible on light; gold like the dark variant)
-	cursor_text    = "#fff6e0", -- warm near-white glyph on the deep-gold block
+	cursor         = "#007a94", -- deep electric-cyan block cursor (cyan like the dark variant; reads on the light bg)
+	cursor_text    = "#fff4fb", -- light glyph (= bg) on the deep-cyan block
 	accent         = "#e00080", -- deep bubblegum (primary UI accent)
-	match          = "#0091ad", -- deep cyan (completion match — cool relief)
+	match          = "#007a94", -- deep cyan (completion match — cool relief)
 	border         = "#a87c1f", -- deepened gold (float borders + window separators) — reads on light
 
 	-- Diagnostics — deep fg that reads on the light editor (virtual text, floats).
